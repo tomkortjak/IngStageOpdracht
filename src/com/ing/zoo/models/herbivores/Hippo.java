@@ -1,6 +1,6 @@
-package com.ing.zoo.animals.herbivores;
+package com.ing.zoo.models.herbivores;
 
-import com.ing.zoo.animals.Herbivore;
+import com.ing.zoo.models.Herbivore;
 
 public class Hippo extends Herbivore {
     private final String helloText = "splash";

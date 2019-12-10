@@ -1,6 +1,6 @@
-package com.ing.zoo.animals.omnivore;
+package com.ing.zoo.models.omnivore;
 
-import com.ing.zoo.animals.Omnivore;
+import com.ing.zoo.models.Omnivore;
 
 import java.util.Random;
 

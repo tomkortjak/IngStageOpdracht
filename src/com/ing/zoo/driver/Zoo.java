@@ -1,14 +1,14 @@
-package com.ing.zoo;
-import com.ing.zoo.animals.Animal;
-import com.ing.zoo.animals.Carnivore;
-import com.ing.zoo.animals.Herbivore;
-import com.ing.zoo.animals.carnivores.Bear;
-import com.ing.zoo.animals.carnivores.Lion;
-import com.ing.zoo.animals.carnivores.Tiger;
-import com.ing.zoo.animals.herbivores.Giraffe;
-import com.ing.zoo.animals.herbivores.Hippo;
-import com.ing.zoo.animals.herbivores.Zebra;
-import com.ing.zoo.animals.omnivore.Pig;
+package com.ing.zoo.driver;
+import com.ing.zoo.models.Animal;
+import com.ing.zoo.models.Carnivore;
+import com.ing.zoo.models.Herbivore;
+import com.ing.zoo.models.carnivores.Bear;
+import com.ing.zoo.models.carnivores.Lion;
+import com.ing.zoo.models.carnivores.Tiger;
+import com.ing.zoo.models.herbivores.Giraffe;
+import com.ing.zoo.models.herbivores.Hippo;
+import com.ing.zoo.models.herbivores.Zebra;
+import com.ing.zoo.models.omnivore.Pig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
