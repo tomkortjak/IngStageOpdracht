@@ -1,21 +1,30 @@
 package com.ing.zoo;
-
 import com.ing.zoo.animals.Animal;
 import com.ing.zoo.animals.Carnivore;
 import com.ing.zoo.animals.Herbivore;
+import com.ing.zoo.animals.carnivores.Bear;
 import com.ing.zoo.animals.carnivores.Lion;
 import com.ing.zoo.animals.carnivores.Tiger;
+import com.ing.zoo.animals.herbivores.Giraffe;
 import com.ing.zoo.animals.herbivores.Hippo;
 import com.ing.zoo.animals.herbivores.Zebra;
 import com.ing.zoo.animals.omnivore.Pig;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * author: Tom Kwarten
+ * Description: This application imitates a Zoo with different types of animals: Herbivore, Carnivore and Omnivore
+ * There are 4 commands which activate a method from the animals that belong to that command.
+ */
 public class Zoo {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         String input = "";
+
         //Array of commands
         String[] commands = new String[4];
         commands[0] = "hello";
@@ -23,45 +32,42 @@ public class Zoo {
         commands[2] = "give meat";
         commands[3] = "perform trick";
 
-        //List of new animals
+        //ArrayList of with 7 instances of animals
         List<Animal> animals = new ArrayList<>();
         animals.add(new Lion("henk"));
         animals.add(new Hippo("elsa"));
         animals.add(new Pig("dora"));
         animals.add(new Tiger("wally"));
         animals.add(new Zebra("marty"));
+        animals.add(new Giraffe("neckie"));
+        animals.add(new Bear("winnie"));
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Voer uw command in (voer S in om te stoppen): ");
+        //Print out all animals
+        System.out.println("All animals:");
+        animals.forEach(animal -> System.out.println("Name: " + animal.getName() + " - Type: " + animal.getClass().getSimpleName()));
 
+        //print commands
+        System.out.println("\nAll commands:");
+        Arrays.stream(commands).forEach(System.out::println);
+
+        //Checks every input and searching for a command according to the input
         while (!input.toLowerCase().equals("s")) {
+            System.out.print("\nType in your command (type S to stop the application): ");
             input = scanner.nextLine();
+            String temporaryInput = input;
+            Animal foundAnimal = animals.stream()
+                    .filter(animal -> ("hello " + animal.getName()).equals(temporaryInput)).findFirst().orElse(null);
 
-            if (input.contains(commands[0])) {
-                for (Animal animal : animals) {
-                    if (input.contains(animal.getName())) {
-                        animal.sayHello();
-                        break;
-                    } else if (input.equals("hello")) {
-                        animal.sayHello();
-                    }
-                }
-            } else if (input.contains(commands[1])) {
-                for (Animal animal : animals) {
-                    if (animal instanceof Herbivore) {
-                        ((Herbivore) animal).eatLeaves();
-                    }
-                }
-            } else if (input.contains(commands[2])) {
-                for (Animal animal : animals) {
-                    if (animal instanceof Carnivore) {
-                        ((Carnivore) animal).eatMeat();
-                    }
-                }
-            } else if (input.contains(commands[3])) {
-                for (Animal animal : animals) {
-                    animal.performTrick();
-                }
+            if (foundAnimal == null && input.equals(commands[0])) {
+                animals.forEach(Animal::sayHello);
+            } else if (foundAnimal != null && input.contains(commands[0])) {
+                foundAnimal.sayHello();
+            } else if (input.equals(commands[1])) {
+                animals.stream().filter(animal -> animal instanceof Herbivore).forEach(animal -> ((Herbivore) animal).eatLeaves());
+            } else if (input.equals(commands[2])) {
+                animals.stream().filter(animal -> animal instanceof Carnivore).forEach(animal -> ((Carnivore) animal).eatMeat());
+            } else if (input.equals(commands[3])) {
+                animals.forEach(Animal::performTrick);
             } else {
                 System.out.println("Unknown command: " + input);
             }
